@@ -20,6 +20,10 @@ async def upload_file_and_show(e):
         Element("word").write(line)
         await asyncio.sleep(wait_seconds_for(line))
 
+        while current_status == "pause":
+            # TODO: change this :-)
+            await asyncio.sleep(0.5)
+
 
 async def get_bytes_from_file(file):
     array_buf = await file.arrayBuffer()
