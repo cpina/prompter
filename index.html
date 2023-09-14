@@ -9,12 +9,15 @@
 </head>
 <body>
 <section class="pyscript">
+    <p>Select a file to start the prompter...</p>
     <label for="file-upload"></label>
     <input type="file" id="file-upload">
 
-    <h1 id="word">...</h1>
+    <h1 id="word"></h1>
 
     <button py-click="toggle_play_pause()" id="play_pause" class="py-button">Pause</button>
+
+    <div id="progress"></div>
 
     <py-script src="./play_pause.py"></py-script>
     <py-script src="./file_upload.py"></py-script>

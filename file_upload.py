@@ -13,17 +13,22 @@ async def upload_file_and_show(e):
 
     my_bytes: bytes = await get_bytes_from_file(first_item)
 
-    lines = my_bytes.decode("utf-8").split("\n")
+    lines = my_bytes.decode("utf-8").rstrip().split("\n")
 
-    for line in lines:
-        line = line.rstrip()
-        Element("word").write(line)
-        await asyncio.sleep(wait_seconds_for(line))
+    Element("play_pause").element.style.display = "block"
+
+    for i, word in enumerate(lines):
+        word = word.rstrip()
+        Element("progress").write(f"Word {i+1} of {len(lines)}")
+        Element("word").write(word)
+        await asyncio.sleep(wait_seconds_for(word))
 
         while current_status == "pause":
             # TODO: change this :-)
             await asyncio.sleep(0.5)
 
+    Element("progress").write(f"Finished! Done {len(lines)}")
+    Element("play_pause").element.style.display = "none"
 
 async def get_bytes_from_file(file):
     array_buf = await file.arrayBuffer()

@@ -1,4 +1,5 @@
 current_status = "play"
+Element("play_pause").element.style.display = "none"
 
 def toggle_play_pause():
     global current_status
