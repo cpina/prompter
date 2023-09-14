@@ -9,9 +9,14 @@
 </head>
 <body>
 <section class="pyscript">
-    <div id="word" class="font-mono">Test</div>
+    <label for="file-upload"></label>
+    <input type="file" id="file-upload">
+
+    <div id="word" style="font-size: 24px;">...</div>
+
+
+    <py-config src="./pyscript.toml"></py-config>
+    <py-script src="./file_upload.py"></py-script>
 </section>
-<py-config src="./pyscript.toml"></py-config>
-<py-script src="./main.py"></py-script>
 </body>
 </html>
