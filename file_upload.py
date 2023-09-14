@@ -18,7 +18,6 @@ async def upload_file_and_show(e):
     for line in lines:
         line = line.rstrip()
         Element("word").write(line)
-        print(wait_seconds_for(line))
         await asyncio.sleep(wait_seconds_for(line))
 
 
