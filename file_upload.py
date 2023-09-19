@@ -2,13 +2,19 @@ from js import document, window, Uint8Array
 
 from pyodide.ffi.wrappers import add_event_listener
 import asyncio
-
-def wait_seconds_for(word):
-    return len(word) * 0.22 + 1.5
+from js import localStorage
+from pathlib import PureWindowsPath
+import play_pause
+from pyscript import Element
+import json
 
 async def upload_file_and_show(e):
-    file_list = e.target.files
+    # Firefox on Linux return a "name" such as "c:\fake\filename.txt". We
+    # only want the "filename.txt" so "PureWindowsPath" is used (because
+    # Pyode use, by default if using Path, POSIX paths).
+    filename = PureWindowsPath(Element("file-upload").element.value).name
 
+    file_list = e.target.files
     first_item = file_list.item(0)
 
     my_bytes: bytes = await get_bytes_from_file(first_item)
@@ -19,20 +25,11 @@ async def upload_file_and_show(e):
         Element("status").write(exc)
         return
 
-    Element("play_pause").element.style.display = "block"
+    localStorage.setItem("filename", filename)
+    localStorage.setItem("lines", json.dumps(lines))
+    localStorage.setItem("next_word", 0)
 
-    for i, word in enumerate(lines):
-        word = word.rstrip()
-        Element("progress").write(f"Word {i+1} of {len(lines)}")
-        Element("word").write(word)
-        await asyncio.sleep(wait_seconds_for(word))
-
-        while current_status == "pause":
-            # TODO: change this :-)
-            await asyncio.sleep(0.5)
-
-    Element("progress").write(f"Finished! Done {len(lines)}")
-    Element("play_pause").element.style.display = "none"
+    await play_pause.start_play()
 
 async def get_bytes_from_file(file):
     array_buf = await file.arrayBuffer()

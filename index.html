@@ -20,7 +20,13 @@
     <div id="progress"></div>
     <div id="status"></div>
 
+    <py-config>
+        [[fetch]]
+        files = ["./play_pause.py", "./resume_previous.py", "./file_upload.py"]
+    </py-config>
+
     <py-script src="./play_pause.py"></py-script>
+    <py-script src="./resume_previous.py"></py-script>
     <py-script src="./file_upload.py"></py-script>
 </section>
 </body>
