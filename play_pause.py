@@ -24,8 +24,9 @@ def toggle_play_pause():
 
 
 async def start_play():
+    Element("play_pause").element.style.display = "block"
+
     initial = localStorage.getItem("next_word")
-    print("INITIAL:", initial)
     if initial is None:
         initial = 0
     else:
