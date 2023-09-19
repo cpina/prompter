@@ -13,7 +13,11 @@ async def upload_file_and_show(e):
 
     my_bytes: bytes = await get_bytes_from_file(first_item)
 
-    lines = my_bytes.decode("utf-8").rstrip().split("\n")
+    try:
+        lines = my_bytes.decode("utf-8").rstrip().split("\n")
+    except UnicodeError as exc:
+        Element("status").write(exc)
+        return
 
     Element("play_pause").element.style.display = "block"
 
