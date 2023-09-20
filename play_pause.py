@@ -13,16 +13,21 @@ def toggle_play_pause():
     if current_status == "play":
         current_status = "pause"
         event.clear()
-        button_action = "play"
     elif current_status == "pause":
         current_status = "play"
         asyncio.ensure_future(start_play(event))
-        button_action = "pause"
     elif current_status == "resume":
         current_status = "play"
-        button_action = "pause"
         # file_upload didn't call it, so we do it from here
         asyncio.ensure_future(start_play(event))
+
+    if current_status == "pause":
+        if int(localStorage.getItem("next_word")) == 0:
+            button_action = "start"
+        else:
+            button_action = "resume"
+    elif current_status == "play":
+        button_action = "pause"
 
     Element("play_pause").write(button_action.capitalize())
 
