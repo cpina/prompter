@@ -66,6 +66,8 @@ async def start_play(event):
         localStorage.removeItem("lines")
         localStorage.removeItem("next_word")
 
+        Element("introduction").write("Select a file to start the prompter...")
+
 
 def wait_seconds_for(word):
     return len(word) * 0.22 + 1.5
