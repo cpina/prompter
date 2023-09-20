@@ -9,6 +9,7 @@ from pyscript import Element
 import json
 
 async def upload_file_and_show(e):
+    global event
     # Firefox on Linux return a "name" such as "c:\fake\filename.txt". We
     # only want the "filename.txt" so "PureWindowsPath" is used (because
     # Pyode use, by default if using Path, POSIX paths).
@@ -29,7 +30,7 @@ async def upload_file_and_show(e):
     localStorage.setItem("lines", json.dumps(lines))
     localStorage.setItem("next_word", 0)
 
-    await play_pause.start_play()
+    await play_pause.start_play(event)
 
 async def get_bytes_from_file(file):
     array_buf = await file.arrayBuffer()
