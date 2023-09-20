@@ -3,30 +3,30 @@ from pyscript import Element
 import asyncio
 import json
 
-current_status = "play"
+current_status = "playing"
 
 event = asyncio.Event()
 
 def toggle_play_pause():
     global current_status
 
-    if current_status == "play":
-        current_status = "pause"
+    if current_status == "playing":
+        current_status = "paused"
         event.clear()
-    elif current_status == "pause":
-        current_status = "play"
+    elif current_status == "paused":
+        current_status = "playing"
         asyncio.ensure_future(start_play(event))
     elif current_status == "resume":
-        current_status = "play"
+        current_status = "playing"
         # file_upload didn't call it, so we do it from here
         asyncio.ensure_future(start_play(event))
 
-    if current_status == "pause":
+    if current_status == "paused":
         if int(localStorage.getItem("next_word")) == 0:
             button_action = "start"
         else:
             button_action = "resume"
-    elif current_status == "play":
+    elif current_status == "playing":
         button_action = "pause"
 
     Element("play_pause").write(button_action.capitalize())
