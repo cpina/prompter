@@ -15,7 +15,7 @@
 
     <h1 id="word"></h1>
 
-    <button py-click="toggle_play_pause()" id="play_pause" class="py-button">Pause</button>
+    <button py-click="toggle_play_pause()" id="play_pause" class="py-button" style="display: none;">Pause</button>
 
     <div id="progress"></div>
     <div id="status"></div>
@@ -28,6 +28,17 @@
     <py-script src="./play_pause.py"></py-script>
     <py-script src="./resume_previous.py"></py-script>
     <py-script src="./file_upload.py"></py-script>
+    <p>
+        The prompter will show each line of the file, waiting certain time between lines.
+    </p>
+    <p>
+        The prompter can be paused, resumed or upload a new file. If the Tab
+        is closed and the prompter is opened again it will be able to resume
+        from the last displayed word.
+    </p>
+    <p>
+        Code available on <a href="https://github.com/cpina/prompter">https://github.com/cpina/prompter</a>
+    </p>
 </section>
 </body>
 </html>
