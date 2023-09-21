@@ -19,7 +19,7 @@ https:// (instead of opening index.html locally).
 It can use Python's simple HTTP server, e.g.:
 
 ```
-$ python3 -m http.server
+$ python3 -m http.server -d src/
 Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
 
